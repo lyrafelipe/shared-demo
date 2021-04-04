@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Shared Demo</string>
+
+    <string name="retry">Retry</string>
+    <string name="error_generic">An unexpected error occurred.</string>
+    <string name="error_network">A connection error occurred. Check your connection and try again.</string>
+    <string name="error_empty">No items to display.</string>
 </resources>
