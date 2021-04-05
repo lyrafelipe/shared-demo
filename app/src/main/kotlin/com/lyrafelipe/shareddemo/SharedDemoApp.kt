@@ -5,6 +5,7 @@ import com.lyrafelipe.shareddemo.remote.remoteModule
 import com.lyrafelipe.shareddemo.repos.reposModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.GlobalContext
 import org.koin.core.context.startKoin
 
 class SharedDemoApp : Application() {
@@ -17,11 +18,10 @@ class SharedDemoApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin {
+        GlobalContext.getOrNull() ?: startKoin {
             androidLogger()
             androidContext(this@SharedDemoApp)
             modules(sharedDemoModules)
         }
     }
 }
-

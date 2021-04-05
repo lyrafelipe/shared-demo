@@ -3,20 +3,11 @@ package com.lyrafelipe.shareddemo.repos
 import com.google.common.truth.Truth.assertThat
 import com.lyrafelipe.shareddemo.InstantExecutionRule
 import com.lyrafelipe.shareddemo.R
-import com.lyrafelipe.shareddemo.models.Owner
-import com.lyrafelipe.shareddemo.models.Repo
-import com.lyrafelipe.shareddemo.models.Repos
 import io.mockk.coEvery
 import io.mockk.mockk
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Rule
 import org.junit.Test
-import retrofit2.HttpException
-import retrofit2.Response
 import java.io.IOException
-import java.util.*
-import kotlin.random.Random
 
 class ReposViewModelTest {
 
@@ -32,9 +23,7 @@ class ReposViewModelTest {
 
     @Test
     fun givenHttpException_whenLoadingRepos_shouldEmitGenericErrorState() {
-        coEvery {
-            mockedGetReposUseCase.execute()
-        } throws HttpException(generateReposErrorResponse())
+        coEvery { mockedGetReposUseCase.execute() } throws generateReposErrorResponse()
 
         reposViewModel.loadRepos()
 
@@ -75,32 +64,5 @@ class ReposViewModelTest {
             reposViewModel.getViewState().value
         ).isEqualTo(ReposViewState.Success(repos.items))
     }
-
-    private fun generateRepoList(): List<Repo> {
-        return listOf(
-            Repo(
-                Random.nextInt(),
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
-                Random.nextInt(),
-                Random.nextInt(),
-                Owner(
-                    Random.nextInt(),
-                    UUID.randomUUID().toString(),
-                    UUID.randomUUID().toString()
-                )
-            )
-        )
-    }
-
-    private fun generateReposErrorResponse(): Response<Repos> =
-        Response.error(
-            500,
-            "".toResponseBody("application/json".toMediaType())
-        )
-
-    private fun generateRepos() = Repos(generateRepoList())
-
-    private fun generateEmptyRepos() = Repos(listOf())
 }
 

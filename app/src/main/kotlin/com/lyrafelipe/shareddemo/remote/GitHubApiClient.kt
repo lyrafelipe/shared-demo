@@ -15,7 +15,7 @@ object GitHubApiClient {
     fun createGitHubApiClient(): GitHubApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(Json.asConverterFactory(contentType))
+            .addConverterFactory(Json { ignoreUnknownKeys = true }.asConverterFactory(contentType))
             .build()
             .create(GitHubApi::class.java)
     }
