@@ -28,7 +28,7 @@ class ReposActivity : AppCompatActivity() {
         )
         reposBinding.repos.adapter = reposAdapter
 
-        reposViewModel.getViewState().observe(this, Observer {
+        reposViewModel.getViewState().observe(this, {
             when (it) {
                 is ReposViewState.Success -> showRepos(it.repos)
                 is ReposViewState.Empty -> showEmptyList()

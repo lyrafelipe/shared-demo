@@ -45,8 +45,7 @@ class ReposViewModelTest {
 
     @Test
     fun givenEmptyReposList_whenLoadingRepos_shouldEmitSuccessState() {
-        val repos = generateEmptyRepos()
-        coEvery { mockedGetReposUseCase.execute() } returns repos
+        coEvery { mockedGetReposUseCase.execute() } returns generateEmptyRepos()
 
         reposViewModel.loadRepos()
 
