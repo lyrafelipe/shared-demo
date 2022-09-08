@@ -7,13 +7,12 @@ plugins {
 apply from: "$rootDir/.jacoco/jacoco.gradle"
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.lyrafelipe.shareddemo"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -45,23 +44,16 @@ android {
     }
 
     sourceSets {
-        String sharedTestDir = 'src/sharedTest/kotlin'
-        String sharedResourceDir = 'src/sharedTest/resources'
-
         main {
             java.srcDirs "src/main/kotlin"
         }
 
         test {
             java.srcDirs "src/test/kotlin"
-            java.srcDirs sharedTestDir
-            resources.srcDirs sharedResourceDir
         }
 
         androidTest {
             java.srcDirs "src/androidTest/kotlin"
-            java.srcDirs sharedTestDir
-            resources.srcDirs sharedResourceDir
         }
     }
 
