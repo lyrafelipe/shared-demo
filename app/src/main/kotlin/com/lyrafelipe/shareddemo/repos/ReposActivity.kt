@@ -2,7 +2,6 @@ package com.lyrafelipe.shareddemo.repos
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lyrafelipe.shareddemo.R
@@ -28,13 +27,13 @@ class ReposActivity : AppCompatActivity() {
         )
         reposBinding.repos.adapter = reposAdapter
 
-        reposViewModel.getViewState().observe(this, {
+        reposViewModel.getViewState().observe(this) {
             when (it) {
                 is ReposViewState.Success -> showRepos(it.repos)
                 is ReposViewState.Empty -> showEmptyList()
                 is ReposViewState.Error -> showError(it.errorResId)
             }
-        })
+        }
 
         reposBinding.reposError.retry.setOnClickListener {
             reposBinding.reposFlipper.displayedChild = 0

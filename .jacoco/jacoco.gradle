@@ -4,7 +4,7 @@ def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest
 def classes = fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
 def sources = files("$projectDir/src/main/kotlin")
 
-jacoco.toolVersion "0.8.6"
+jacoco.toolVersion "0.8.8"
 
 tasks.withType(Test) {
     jacoco.includeNoLocationClasses = true
@@ -19,11 +19,11 @@ task jacocoCoverageReport(type: JacocoReport) {
     ]))
 
     reports {
-        xml.enabled = true
-        html.enabled = true
+        xml.getRequired().set(true)
+        html.getRequired().set(true)
     }
 
     doLast {
-        println "JaCoCo report has been generated to file://${reports.html.destination}/index.html"
+        println "JaCoCo report has been generated to file://${reports.html.getOutputLocation()}/index.html"
     }
 }

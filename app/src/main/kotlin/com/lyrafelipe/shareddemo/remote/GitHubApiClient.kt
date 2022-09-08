@@ -10,12 +10,13 @@ object GitHubApiClient {
 
     private const val BASE_URL = "https://api.github.com/"
     private val contentType = "application/json".toMediaType()
+    private val json = Json { ignoreUnknownKeys = true }
 
     @OptIn(ExperimentalSerializationApi::class)
     fun createGitHubApiClient(): GitHubApi {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(Json { ignoreUnknownKeys = true }.asConverterFactory(contentType))
+            .addConverterFactory(json.asConverterFactory(contentType))
             .build()
             .create(GitHubApi::class.java)
     }
