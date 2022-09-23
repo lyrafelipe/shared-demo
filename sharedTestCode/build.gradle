@@ -33,6 +33,7 @@ android {
             java.srcDirs "src/main/kotlin"
         }
     }
+    namespace 'com.lyrafelipe.sharedtestcode'
 }
 
 dependencies {
