@@ -1,24 +1,26 @@
 package com.lyrafelipe.shareddemo.repos
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import io.mockk.mockkClass
+import com.lyrafelipe.sharedtestcode.repos.ReposAct
+import com.lyrafelipe.sharedtestcode.repos.ReposArrange
+import com.lyrafelipe.sharedtestcode.repos.ReposAssert
+import com.lyrafelipe.sharedtestcode.rules.MockProviderRule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.test.mock.MockProviderRule
+import org.robolectric.annotation.Config
 
+@Config(sdk = [32])
 @RunWith(AndroidJUnit4::class)
 class ReposActivityTest {
 
     @get:Rule
-    val mockProvider = MockProviderRule.create {
-        mockkClass(it)
-    }
+    val mockProviderRule = MockProviderRule()
 
     @Test
     fun givenGenericError_whenLoadingRepos_shouldShowGenericErrorMessage() {
         ReposArrange {
-            this.setupErrorResponse()
+            setupErrorResponse()
         }
 
         ReposAct {
@@ -63,7 +65,7 @@ class ReposActivityTest {
     @Test
     fun givenError_whenLoadingRepos_shouldRetryLoading() {
         ReposArrange {
-            this.setupRetryErrorResponse()
+            setupRetryErrorResponse()
         }
 
         ReposAct {

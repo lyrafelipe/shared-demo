@@ -1,8 +1,12 @@
 package com.lyrafelipe.shareddemo.repos
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
-import com.lyrafelipe.shareddemo.InstantExecutionRule
 import com.lyrafelipe.shareddemo.R
+import com.lyrafelipe.sharedtestcode.repos.generateEmptyRepos
+import com.lyrafelipe.sharedtestcode.repos.generateRepos
+import com.lyrafelipe.sharedtestcode.repos.generateReposErrorResponse
+import com.lyrafelipe.sharedtestcode.rules.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Rule
@@ -12,7 +16,10 @@ import java.io.IOException
 class ReposViewModelTest {
 
     @get:Rule
-    val instantExecutionRule = InstantExecutionRule()
+    val instantExecutorRule = InstantTaskExecutorRule()
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     private val mockedGetReposUseCase = mockk<GetReposUseCase>()
     private val reposViewModel by lazy {

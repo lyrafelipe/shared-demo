@@ -1,2 +1,4 @@
-include ':app'
 rootProject.name = "Shared Demo"
+
+include ':app'
+include ':sharedTestCode'

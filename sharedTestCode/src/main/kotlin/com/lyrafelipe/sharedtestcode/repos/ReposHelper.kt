@@ -1,4 +1,4 @@
-package com.lyrafelipe.shareddemo.repos
+package com.lyrafelipe.sharedtestcode.repos
 
 import com.lyrafelipe.shareddemo.models.Owner
 import com.lyrafelipe.shareddemo.models.Repo
@@ -7,7 +7,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.HttpException
 import retrofit2.Response
-import java.util.*
+import java.util.UUID
 import kotlin.random.Random
 
 fun generateReposErrorResponse() = HttpException(
